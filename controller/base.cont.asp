@@ -1,0 +1,5 @@
+<%
+Class CBase
+    
+End Class
+%>
