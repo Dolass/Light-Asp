@@ -10,5 +10,11 @@
 <% do while not v.Var("views").eof%>
     <%=v.Var("views")("content")%>
 <% v.Var("views").movenext:loop%>
+
+<ul>
+<%do while not v.Var("List").eof%>
+<li><%=v.Var("List")("uname")%></li>
+<%v.Var("List").movenext:loop%>
+</ul>
 </body>
 </html>

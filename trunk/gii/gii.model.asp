@@ -5,8 +5,10 @@ Set conn = Server.CreateObject("Adodb.connection")
 conn.open DBString_
 Dim DbConstruct
 pkName = ""
-GetFileds "news"
-className = "News"
+propesup = ""
+
+GetFileds "TUser"
+className = "TUser"
 
 Set fso = Server.CreateObject("Scripting.FileSystemObject")
     set codetp = fso.OpenTextFile(Server.MapPath("model.code.asp"), 1, false)
@@ -16,7 +18,8 @@ Set fso = Server.CreateObject("Scripting.FileSystemObject")
 	str = replace(str, "{modelName}", className)
 	str = replace(str, "{createdate}", now())
 	str = replace(str, "{proper}", DbConstruct)
-	str = replace(str, "{pkname}", pkName) 
+	str = replace(str, "{pkname}", pkName)
+	str = replace(str, "{propersup}", propesup) 
 f.Write(str) 
 f.Close() 
 codetp.close():set codetp = nothing
@@ -56,7 +59,13 @@ end select
 
 fieldName = UCase(left(fieldName,1))&right(fieldName ,len(fieldName)-1)
 response.write " <font color=red>"&i&"</font>--<font color=green><b>"&fieldName&"</b></font>--"&filtype&";<br />"&vbcrlf
-DbConstruct = DbConstruct&chr(32)&chr(32)&"Public "&fieldName&vbnewline 
+DbConstruct = DbConstruct&chr(32)&chr(32)&"Public "&fieldName&vbnewline
+
+if filtype<>"自动编号(数字)" then
+	propesup= propesup&chr(32)&chr(32)&chr(32)&chr(32)&"Propes.Add """&fieldName&""", """&fieldName&""""&vbnewline
+end if
+
+ 
 Next 
 response.write "</div>"&vbcrlf 
 rs.Close 
