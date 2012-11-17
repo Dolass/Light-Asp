@@ -10,10 +10,25 @@ Class Model_{modelName}
   Public Dic
 
   Private tb_name
+    
+  Public Propes '所有属性的集合
   
   Private Sub Class_Initialize()
       tb_name = "{modelName}"
+	  Set Propes = Server.CreateObject("Scripting.Dictionary")
+{propersup}
   End Sub
+  
+  Public Function Save()
+  		tdb.CloseRs
+		sql = "SELECT * FROM "&tb_name
+		tdb.Rs_.Open sql,tdb.Conn_,1,3
+		tdb.Rs_.AddNew
+		    for each PropName in Propes
+			    tdb.Rs_(PropName) = Eval(PropName)
+			next
+		tdb.Rs_.Update
+  End Function
  
   Public Function FindByPk(pk)
         tdb.CloseRs	    

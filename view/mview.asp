@@ -18,7 +18,7 @@ Class V_
 	        Set tt_ = val
 		else
 			tt_ = val
-		end if
+		end if		
 	End Sub
 	
 	Public Function Var(varName)
@@ -33,5 +33,5 @@ Class V_
 End Class
 
 Set v = New V_
-    v.SetT_(tt)
+    v.SetT_(tt)	
 %>

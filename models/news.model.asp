@@ -12,12 +12,28 @@ Class Model_News
 
 	
   Public Dic
+  Public Propes '所有属性的集合
 
   Private tb_name
   
   Private Sub Class_Initialize()
       tb_name = "News"
+	  Set Propes = Server.CreateObject("Scripting.Dictionary")
+		  Propes.Add "Title", "Title"
+		  Propes.Add "Content", "Content"
+		  Propes.Add "Addtime", "Addtime"
   End Sub
+  
+  Public Function Save()
+  		tdb.CloseRs
+		sql = "SELECT * FROM "&tb_name
+		tdb.Rs_.Open sql,tdb.Conn_,1,3
+		tdb.Rs_.AddNew
+		    for each PropName in Propes
+			    tdb.Rs_(PropName) = Eval(PropName)
+			next
+		tdb.Rs_.Update
+  End Function
  
   Public Function FindByPk(pk)
         tdb.CloseRs	    
