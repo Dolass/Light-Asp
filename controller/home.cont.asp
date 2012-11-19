@@ -30,7 +30,7 @@ Class Controller_Home
 			user.upass = sec.md5("shibaolin")
 			user.update 1
 			
-					Set user = tdb.Model("TUser")
+		Set user = tdb.Model("TUser")
 		Set Rs = user.FindAll("id", "desc")
 		
 		Set app.tt.Views("list") = Rs
